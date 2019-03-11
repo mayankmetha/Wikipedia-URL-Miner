@@ -10,6 +10,7 @@ files = [mypath+str(f) for f in listdir(mypath) if isfile(join(mypath,f))]
 urlSet = set()
 urlSetD = set()
 urls = []
+baseUrl = "https://en.wikipedia.org"
 
 if len(files) == 0:
     print('Starting from fresh...')
@@ -21,13 +22,13 @@ else:
 		fin = open(f,'r')
 		for l in fin.readlines():
 			l = l.strip()
+			l = l.replace(baseUrl,"")
 			url = l.split(' ')
 			urlSet.add(url[0])
 			urlSetD.add(url[1])
 	urls = list(urlSetD-urlSet)
 
 col = ['src','dest']
-baseUrl = "https://en.wikipedia.org"
 print('Starting mining...')
 for url in urls:
     if url in urlSet:
